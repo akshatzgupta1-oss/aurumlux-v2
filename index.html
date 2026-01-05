@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="description" content="AurumLux Events - Luxury event planning and managed matchmaking for weddings, corporate galas, and private events.">
+  <meta name="keywords" content="AurumLux Events, Event Planner, Luxury Weddings, Aurum Lux, Event Management">
+  <link rel="canonical" href="https://aurumluxevents.live">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AurumLux Events | Luxury Matchmaking</title>
+
+<style>
+/* ========== RESET & BASE (Existing) ========== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:#0a0a0a;
+  color:#f3f3f3;
+  font-family:Inter,system-ui,sans-serif;
+  overflow-x:hidden;
+}
+
+/* ========== GLOBAL (Existing) ========== */
+.container{max-width:1100px;margin:auto;padding:0 28px}
+.section{padding:140px 0;position:relative}
+.soft{background:#0f0f0f}
+.deep{background:#080808}
+.divider{
+  height:1px;
+  background:linear-gradient(to right,transparent,#2a2a2a,transparent)
+}
+.gold{color:#c9ad6a}
+.btn-gold{
+  display:inline-block;
+  padding:16px 44px;
+  border-radius:40px;
+  border:1px solid rgba(201,173,106,.5);
+  color:#c9ad6a;
+  letter-spacing:1.2px;
+  font-size:13px;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+.btn-gold:hover{
+  background: #c9ad6a;
+  color: #0a0a0a;
+}
+a{text-decoration:none;color:inherit}
+
+/* ========== FLOATING LUXURY ISLAND ========== */
+.floating-island {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background: rgba(15, 15, 15, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201,173,106, 0.2);
+  border-radius: 50px;
+  z-index: 1500;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+}
+.island-btn {
+  padding: 10px 24px;
+  border-radius: 40px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+.island-btn-gold { background: #c9ad6a; color: #0a0a0a; }
+.island-btn-outline { color: #c9ad6a; border: 1px solid rgba(201,173,106, 0.3); }
+
+/* ========== NAVBAR & LOGO (Existing) ========== */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:1000;
+  background:rgba(10,10,10,.85);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px 0;
+}
+.brand-container { display: flex; flex-direction: column; align-items: flex-start; }
+.logo-img { 
+  height: 60px; 
+  width: auto; 
+  display: block; 
+  border-radius: 4px; 
+}
+.tagline {
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #c9ad6a;
+  margin-top: 4px;
+  opacity: 0.7;
+}
+.nav-links{ display:flex; gap:20px; align-items:center; }
+.nav-links a{ font-size:11px; letter-spacing:1.2px; text-transform:uppercase; opacity:.65; transition: 0.3s;}
+.nav-links a:hover{ opacity:1; color:#c9ad6a; }
+.vendor-link{
+  padding:8px 16px;
+  border:1px solid rgba(201,173,106,.45);
+  border-radius:30px;
+  color:#c9ad6a !important;
+}
+
+/* ========== FORMS & MODALS ========== */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+.modal-content {
+  background: #0f0f0f;
+  padding: 40px;
+  border: 1px solid rgba(201,173,106,0.2);
+  width: 90%;
+  max-width: 550px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.close-modal { position: absolute; top: 20px; right: 20px; color: #c9ad6a; cursor: pointer; font-size: 20px; }
+.booking-form input, .booking-form select, .booking-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background: #151515;
+  border: 1px solid #2a2a2a;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+}
+.booking-form label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; opacity: 0.6;}
+.vendor-form-container { background: #0f0f0f; padding: 30px; border: 1px solid rgba(255,255,255,0.05); }
+
+/* ========== SECTIONS ========== */
+.hero{ min-height:100vh; display:flex; align-items:center; background: radial-gradient(circle at 60% 20%,rgba(201,173,106,.15),transparent 55%), linear-gradient(to bottom,#0a0a0a,#080808); }
+.hero h1{ font-family:"Playfair Display",serif; font-size:clamp(40px,6vw,80px); line-height:1.1; max-width:820px;}
+.hero p{ margin-top:30px; font-size:18px; max-width:480px; opacity:.75; }
+.label{ font-size:12px; letter-spacing:1.6px; text-transform:uppercase; color:#c9ad6a; margin-bottom:20px;}
+.statement h2{ font-family:"Playfair Display",serif; font-size:clamp(30px,4.5vw,50px); font-weight:500; }
+.trust-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:60px; margin-top:80px; }
+.experience{ margin-top:80px; display:grid; grid-template-columns:repeat(4,1fr); gap:40px;}
+.step{ border-left:1px solid rgba(255,255,255,.08); padding-left:20px;}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:100px}
+.cta{text-align:center}
+
+footer{ padding:60px 0; text-align:center; font-size:12px;}
+.footer-links { margin-bottom: 20px; display: flex; justify-content: center; gap: 20px;}
+
+.reveal{ opacity:0; transform:translateY(30px); transition:all 0.8s ease;}
+.reveal.active{ opacity:1; transform:translateY(0);}
+
+.hamburger{ display:none; font-size:26px; cursor:pointer; color:#c9ad6a; }
+.mobile-menu{ display:none; flex-direction:column; background:#0a0a0a; border-top:1px solid rgba(255,255,255,.08); }
+.mobile-menu a{ padding:18px 28px; font-size:12px; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,.06); }
+
+@media(max-width:900px){
+  .trust-grid,.experience,.split{ grid-template-columns:1fr; gap:50px;}
+  .nav-links,.vendor-link{display:none}
+  .hamburger{display:block}
+  .floating-island { width: 90%; justify-content: space-around; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="floating-island" id="island">
+  <a href="javascript:void(0)" onclick="openModal()" class="island-btn island-btn-gold">Book a Call</a>
+  <a href="#vendors" class="island-btn island-btn-outline">Join Network</a>
+</div>
+
+<header>
+  <div class="container nav">
+    <div class="brand-container">
+      <img src="logo.png.png" alt="AurumLux Logo" class="logo-img">
+      <div class="tagline">Luxury is certainty</div>
+    </div>
+    <div class="nav-links">
+      <a href="#approach">Approach</a>
+      <a href="#clients">Clients</a>
+      <a href="#vendors">Vendors</a>
+      <a href="https://www.instagram.com/aurumluxevents" target="_blank">Instagram</a>
+      <a href="javascript:void(0)" onclick="openModal()" style="color: #c9ad6a; font-weight: bold;">Book a Call</a>
+      <a href="#vendors" class="vendor-link">Vendor Access</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#approach" onclick="toggleMenu()">Approach</a>
+    <a href="#clients" onclick="toggleMenu()">Clients</a>
+    <a href="#vendors" onclick="toggleMenu()">Vendors</a>
+    <a href="https://www.instagram.com/aurumluxevents" target="_blank">Instagram</a>
+    <a href="javascript:void(0)" onclick="openModal(); toggleMenu()">Book a Call</a>
+    <a href="#vendors" onclick="toggleMenu()">Vendor Access</a>
+  </div>
+</header>
+
+<section class="hero section">
+  <div class="container">
+    <h1>Calm execution<br>for moments that<br>truly matter.</h1>
+    <p>We operate behind the scenes of high-stake events, ensuring everything unfolds with precision.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section soft reveal">
+  <div class="container">
+    <div class="label">Philosophy</div>
+    <div class="statement">
+      <h2>Luxury is not decoration.<br><span class="gold">Luxury is certainty.</span></h2>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="approach" class="section deep reveal">
+  <div class="container">
+    <div class="label">How we operate</div>
+    <div class="trust-grid">
+      <div class="trust-item"><h3>Structure</h3><p>Defined workflows eliminate uncertainty.</p></div>
+      <div class="trust-item"><h3>Discretion</h3><p>Execution without noise or disruption.</p></div>
+      <div class="trust-item"><h3>Control</h3><p>Every variable accounted for in advance.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="clients" class="section soft reveal">
+  <div class="container">
+    <div class="label">Client experience</div>
+    <h2 style="font-family:Playfair Display,serif;font-size:40px">What working with us feels like</h2>
+    <div class="experience">
+      <div class="step"><span>01</span><p>You reach out. We listen first.</p></div>
+      <div class="step"><span>02</span><p>A clear execution framework is defined.</p></div>
+      <div class="step"><span>03</span><p>Professionals are aligned and briefed.</p></div>
+      <div class="step"><span>04</span><p>You stay present. We handle the rest.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="vendors" class="section deep reveal">
+  <div class="container split">
+    <div>
+      <div class="label">Vendor collaboration</div>
+      <h2 style="font-family:Playfair Display,serif; font-size: 38px;">Partner Access</h2>
+      <p style="margin-top: 20px;">We partner with managers who respect systems and accountability. Submit your details to join our matchmaking database.</p>
+    </div>
+    <div class="vendor-form-container">
+      <div id="vendorFormContainer">
+        <form id="vendorForm" action="https://formspree.io/f/mzdzoaew" method="POST" class="booking-form">
+          <label>Company / Manager Name</label>
+          <input type="text" name="vendor-name" required>
+          <label>WhatsApp Number</label>
+          <input type="tel" name="vendor-phone" required>
+          <label>Portfolio / Instagram Link <span style="opacity:0.5; font-size:8px;">(Optional)</span></label>
+          <input type="url" name="portfolio" placeholder="https://">
+          <label>Primary Specialty</label>
+          <select name="specialty">
+            <option value="Wedding">Luxury Weddings</option>
+            <option value="Corporate">Corporate Events</option>
+            <option value="Decor">Design & Decor</option>
+          </select>
+          <button type="submit" class="btn-gold" style="width: 100%;">Submit Application</button>
+        </form>
+      </div>
+      <div id="vendorSuccess" style="display:none; text-align:center; padding:40px 20px;">
+        <h2 class="gold">Application Sent</h2>
+        <p>Our team will review your portfolio and contact you for onboarding.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section cta reveal">
+  <div class="container">
+    <div class="label">Reserve your date</div>
+    <h2 style="font-family:Playfair Display,serif;font-size:40px; margin-bottom: 20px;">Begin a conversation</h2>
+    <button onclick="openModal()" class="btn-gold">Book a Call</button>
+  </div>
+</section>
+
+<div id="bookingModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">✕</span>
+    <div id="formContainer">
+      <h2 class="gold">Event Inquiry</h2>
+      <p style="font-size: 12px; opacity: 0.6; margin-bottom: 25px;">Provide your requirements and we'll assign the ideal manager.</p>
+      <form id="leadForm" action="https://formspree.io/f/mykzodeo" method="POST" class="booking-form">
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+        <div style="display: flex; gap: 15px;">
+          <div style="flex: 1;">
+            <label>Type of Event</label>
+            <select name="event-type">
+              <option value="Wedding">Wedding</option>
+              <option value="Corporate">Corporate Gala</option>
+              <option value="Private">Private Event</option>
+            </select>
+          </div>
+          <div style="flex: 1;">
+            <label>Approx. Budget</label>
+            <select name="budget">
+              <option value="5-15L">₹5L - ₹15L</option>
+              <option value="15-50L">₹15L - ₹50L</option>
+              <option value="50L+">₹50L+</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: flex; gap: 15px;">
+          <div style="flex: 1;">
+            <label>WhatsApp Number</label>
+            <input type="tel" name="phone" required>
+          </div>
+          <div style="flex: 1;">
+            <label>Guest Count</label>
+            <input type="number" name="guests" placeholder="Est. count">
+          </div>
+        </div>
+        <label>Your Vision / Message</label>
+        <textarea name="message" rows="3" placeholder="Tell us what you're looking for..."></textarea>
+        <button type="submit" class="btn-gold" style="width: 100%;">Request Manager Assignment</button>
+      </form>
+    </div>
+    <div id="successMessage" style="display:none; text-align:center; padding:40px 20px;">
+      <h2 class="gold">Request Logged</h2>
+      <p style="margin-top:15px; opacity:0.8;">We are analyzing our database. You will hear from your assigned manager shortly.</p>
+      <button onclick="closeModal()" class="btn-gold" style="margin-top:25px;">Done</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/aurumluxevents" target="_blank">Instagram</a>
+    <a href="mailto:riatsofficials.on@gmail.com">Email</a>
+  </div>
+  <div class="copyright">© 2026 AurumLux Events</div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const menu=document.getElementById("mobileMenu");
+  menu.style.display = menu.style.display==="flex" ? "none" : "flex";
+}
+
+function openModal() { 
+    document.getElementById('bookingModal').style.display = 'flex';
+    document.getElementById('formContainer').style.display = 'block';
+    document.getElementById('successMessage').style.display = 'none';
+    document.getElementById('island').style.opacity = '0';
+}
+function closeModal() { 
+    document.getElementById('bookingModal').style.display = 'none'; 
+    document.getElementById('island').style.opacity = '1';
+}
+
+// FORMSPREE AJAX LOGIC
+const handleFormSubmit = (formId, containerId, successId) => {
+  const formEl = document.getElementById(formId);
+  if(!formEl) return;
+  formEl.onsubmit = async function(e) {
+    e.preventDefault();
+    const response = await fetch(formEl.action, {
+      method: "POST",
+      body: new FormData(formEl),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (response.ok) {
+      document.getElementById(containerId).style.display = 'none';
+      document.getElementById(successId).style.display = 'block';
+      formEl.reset();
+    } else {
+      alert("Submission error. Please try again.");
+    }
+  };
+};
+
+handleFormSubmit("leadForm", "formContainer", "successMessage");
+handleFormSubmit("vendorForm", "vendorFormContainer", "vendorSuccess");
+
+// Scroll Behavior for Island
+window.onscroll = function() {
+  let island = document.getElementById("island");
+  if (document.documentElement.scrollTop > 150) {
+    island.style.bottom = "30px"; island.style.opacity = "1";
+  } else {
+    island.style.bottom = "-100px"; island.style.opacity = "0";
+  }
+};
+
+const reveals=document.querySelectorAll(".reveal");
+window.addEventListener("scroll",()=>{
+  reveals.forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight*0.85) el.classList.add("active");
+  });
+});
+</script>
+
+</body>
+</html>
